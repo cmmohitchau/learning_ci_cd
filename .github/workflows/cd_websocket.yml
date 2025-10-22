@@ -12,8 +12,8 @@ jobs:
       - name:  Docker login
         uses: docker/login-action@v2
         with:
-          username: ${{ DOCKERHUB_USERNAME  }}
-          password: ${{ DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME  }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       - name: build and push
         uses: docker/build-push-action@v4
@@ -22,4 +22,4 @@ jobs:
           file: ./Docker/dockerfile.ws
           push: true
           tags: mohitprasad004/todo-app-ws:${{  github.sha  }}
-          
+
