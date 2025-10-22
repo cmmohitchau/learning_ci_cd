@@ -12,10 +12,17 @@ const server = Bun.serve({
       console.log("Client connected");
     },
     async message(ws, message) {
+     
+      const data = message;
+
+      const { username , password } = JSON.parse(data.toString());
+
+      if(!username || !password ) return;
+
       const user = await prismaClient.user.create({
         data : {
-            username : "mohit",
-            password : "ws"
+            username : username,
+            password : password
         }
       })
 
