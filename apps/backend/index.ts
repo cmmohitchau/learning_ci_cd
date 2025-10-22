@@ -13,6 +13,7 @@ app.post("/" , async(req , res) => {
             password : "mohit123backend"
         }
     })
+    console.log("username");
     
 
     res.status(200).json({
