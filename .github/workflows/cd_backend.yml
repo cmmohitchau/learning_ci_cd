@@ -1,0 +1,25 @@
+name: Deploy the backend server
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Docker login
+        uses: docker/login-actions@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Docker/dockerfile.backend
+          push: true
+          tags: mohitprasad004/todo-app-backend:${{ github.sha }}
+        

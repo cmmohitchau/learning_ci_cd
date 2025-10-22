@@ -1,0 +1,31 @@
+{
+  "name": "myturbo-app",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types",
+    "generate:db" : "cd packages/db && bun prisma generate && cd ../..",
+    "migrate:db" : "cd packages/db && bun prisma migrate dev && cd ../..",
+    "start:backend" : "bun run migrate:db && cd apps/backend && bun run start",
+    "start:ws" : "cd apps/ws && bun run start",
+    "start:frontend" : "cd apps/frontend && bun run start",
+    "build:frontend" : "cd apps/frontend && bun run build"
+
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.8",
+    "typescript": "5.9.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "bun@1.2.22",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
